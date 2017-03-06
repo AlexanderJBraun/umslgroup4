@@ -5,4 +5,4 @@ var Product = (function () {
     return Product;
 }());
 exports.Product = Product;
-//# sourceMappingURL=Task.js.map
+//# sourceMappingURL=.js.map

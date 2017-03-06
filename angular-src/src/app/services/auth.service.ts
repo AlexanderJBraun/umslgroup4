@@ -56,8 +56,23 @@ export class AuthService {
     localStorage.clear();
   }
 
-    getProduct(){
-        return this.http.get('http://localhost:3000/api/products')
-            .map(res => res.json());
-    }
+  getProduct(){
+      return this.http.get('http://localhost:3000/products/products')
+          .map(res => res.json());
+  }
+
+
+  addProduct(product){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/products/newProduct',  product,{headers: headers})
+      .map(res => res.json());
+  }
+
+  deleteProduct(id){
+    return this.http.delete('http://localhost:3000/products/product/'+id)
+      .map(res => res.json());
+  }
+
+  
 }

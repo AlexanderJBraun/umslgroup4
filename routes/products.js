@@ -18,5 +18,35 @@ router.get('/products', function(req, res, next){
     });
 });
 
+//add product
+router.post('/newProduct', function(req, res, next){
+    var product = req.body;
+    db.products.save(product, function(err, product){
+        if(err){
+            res.send(err);
+        }
+        res.json(product);
+    });
+});
+
+// Get Single product
+router.get('/product/:id', function(req, res, next){
+    db.products.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, product){
+        if(err){
+            res.send(err);
+        }
+        res.json(product);
+    });
+});
+
+//remove product
+router.delete('/product/:id', function(req, res, next){
+    db.products.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, product){
+        if(err){
+            res.send(err);
+        }
+        res.json(product);
+    });
+});
 
 module.exports = router;
