@@ -1,4 +1,7 @@
 <h2 class="page-header">Product Management</h2>
+<div class="panel">
+<button type="button" class="btn btn-block" data-toggle="collapse" data-target="#addNewProduct">Add new products</button>
+<div id="addNewProduct" class="collapse">
 <form class="well" (submit)="addProduct()">
   <div class="form-group">
     <label>Product Name</label>
@@ -18,6 +21,8 @@
   </div>
   <input type="submit" class="btn btn-primary" value="Add Product">
 </form>
+</div>
+</div>
 
 <div class="product-list">
     <table class="table" >
