@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
                 this.price = null;
                 this.inStock = null;
             });
+
     }
 
     deleteProduct(id){
@@ -60,6 +61,7 @@ export class DashboardComponent implements OnInit {
         }
       });
     }
+
 
 
 }
