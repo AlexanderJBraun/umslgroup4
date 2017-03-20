@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const Product = require('../models/product');
 const mongojs = require('mongojs');
-const db = mongojs('mongodb://dbuser:dbpassword@ds147799.mlab.com:47799/userdatabase');
+const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
 
 // Get products

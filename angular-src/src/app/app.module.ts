@@ -13,6 +13,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CartComponent } from "./components/cart/cart.component";
 import { OrdersComponent } from "./components/orders/orders.component";
+import { InvoicesComponent } from "./components/invoices/invoices.component";
+import { UsersComponent } from "./components/users/users.component";
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
@@ -26,7 +28,9 @@ const appRoutes: Routes =  [
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'cart', component: CartComponent},
-  {path: 'orders', component: OrdersComponent}
+  {path: 'orders', component: OrdersComponent},
+  {path: 'invoices', component: InvoicesComponent},
+  {path: 'users', component: UsersComponent}
 ]
 
 @NgModule({
@@ -39,7 +43,9 @@ const appRoutes: Routes =  [
     DashboardComponent,
     ProfileComponent,
     CartComponent,
-    OrdersComponent
+    OrdersComponent,
+    InvoicesComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

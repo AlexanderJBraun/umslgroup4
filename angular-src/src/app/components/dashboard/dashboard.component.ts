@@ -4,6 +4,9 @@ import {AuthService} from '../../services/auth.service'
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
 import {Product} from '../../../../Product';
+import {AccordionModule} from '../primeng/primeng';     //accordion and accordion tab
+import {MenuItem} from '../primeng/primeng';            //api
+import {DataTableModule,SharedModule} from 'primeng/primeng';
 
 @Component({
   selector: 'app-dashboard',
