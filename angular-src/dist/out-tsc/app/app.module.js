@@ -51,7 +51,9 @@ AppModule = __decorate([
             FlashMessagesModule
         ],
         providers: [ValidateService, AuthService, AuthGuard],
-        bootstrap: [AppComponent]
+        bootstrap: [AppComponent],
+        primeng: [AppComponent]
+
     })
 ], AppModule);
 export { AppModule };
