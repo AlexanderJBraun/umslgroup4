@@ -8,6 +8,7 @@ export class AuthService {
   authToken: any;
   user: any;
   product: any;
+  customer: any;
 
   constructor(private http:Http) { }
 
@@ -61,6 +62,11 @@ export class AuthService {
           .map(res => res.json());
   }
 
+    getCustomer(){
+      return this.http.get('http://localhost:3000/customers/customers')
+          .map(res => res.json());
+  }
+
 
   addProduct(product){
     let headers = new Headers();
@@ -69,8 +75,20 @@ export class AuthService {
       .map(res => res.json());
   }
 
+ addCustomer(customer){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/customers/newCustomer',  customer,{headers: headers})
+      .map(res => res.json());
+  }
+
   deleteProduct(id){
     return this.http.delete('http://localhost:3000/products/product/'+id)
+      .map(res => res.json());
+  }
+
+    deleteCustomer(id){
+    return this.http.delete('http://localhost:3000/customers/customer/'+id)
       .map(res => res.json());
   }
 

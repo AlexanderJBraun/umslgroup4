@@ -1,4 +1,11 @@
+<link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/themes/omega/theme.css" />
+<link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/primeng.min.css" />
+<link rel="stylesheet" type="text/css" href="/node_modules/font-awesome/css/font-awesome.min.css" />
+
 <h2 class="page-header">Product Management</h2>
+<div class="panel">
+<button type="button" class="btn btn-block" data-toggle="collapse" data-target="#addNewProduct"><span class="glyphicon glyphicon-plus"></span>Add new products</button>
+<div id="addNewProduct" class="collapse">
 <form class="well" (submit)="addProduct()">
   <div class="form-group">
     <label>Product Name</label>
@@ -18,6 +25,9 @@
   </div>
   <input type="submit" class="btn btn-primary" value="Add Product">
 </form>
+</div>
+</div>
+
 
 <div class="product-list">
     <table class="table" >
@@ -45,3 +55,13 @@
   </table>
     
 </div>
+
+
+<p-dataTable [value]="products"  [paginator]="true" rows="15" [responsive]="true">
+    <p-header>CRUD for Cars</p-header>
+    <p-column field="name" header="Name" [sortable]="true"></p-column>
+    <p-column field="description" header="Description" [sortable]="true"></p-column>
+    <p-column field="price" header="Price" [sortable]="true"></p-column>
+    <p-column field="inStock" header="Quantity" [sortable]="true"></p-column>
+    <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" label="Add"></button></div></p-footer>
+</p-dataTable>

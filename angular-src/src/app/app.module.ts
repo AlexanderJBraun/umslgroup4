@@ -12,6 +12,10 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CartComponent } from "./components/cart/cart.component";
+import { OrdersComponent } from "./components/orders/orders.component";
+import { InvoicesComponent } from "./components/invoices/invoices.component";
+import { UsersComponent } from "./components/users/users.component";
+import {DataTableModule,SharedModule} from "../../../angular-src/node_modules/primeng/primeng";
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
@@ -24,7 +28,10 @@ const appRoutes: Routes =  [
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path: 'cart', component: CartComponent}
+  {path: 'cart', component: CartComponent},
+  {path: 'orders', component: OrdersComponent},
+  {path: 'invoices', component: InvoicesComponent},
+  {path: 'users', component: UsersComponent}
 ]
 
 @NgModule({
@@ -36,16 +43,21 @@ const appRoutes: Routes =  [
     HomeComponent,
     DashboardComponent,
     ProfileComponent,
-    CartComponent
+    CartComponent,
+    OrdersComponent,
+    InvoicesComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule
+    FlashMessagesModule,
+    DataTableModule,
+    SharedModule
   ],
   providers: [ValidateService, AuthService, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
