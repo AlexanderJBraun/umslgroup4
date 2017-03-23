@@ -4,6 +4,8 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
+const mongojs = require('mongojs');
+const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
 // Register
 router.post('/register', (req, res, next) => {
@@ -63,4 +65,46 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
   res.json({user: req.user});
 });
 
+// Get customres
+router.get('/users', function(req, res, next){
+    db.users.find(function(err, users){
+        if(err){
+            res.send(err);
+        }
+        res.json(users);
+    });
+});
+
+//add customer
+router.post('/newUser', function(req, res, next){
+    var user = req.body;
+    db.users.save(user, function(err, user){
+        if(err){
+            res.send(err);
+        }
+        res.json(user);
+    });
+});
+
+// Get Single customer
+router.get('/user/:id', function(req, res, next){
+    db.users.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
+        if(err){
+            res.send(err);
+        }
+        res.json(user);
+    });
+});
+
+//remove customer
+router.delete('/user/:id', function(req, res, next){
+    db.users.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
+        if(err){
+            res.send(err);
+        }
+        res.json(user);
+    });
+});
+
 module.exports = router;
+

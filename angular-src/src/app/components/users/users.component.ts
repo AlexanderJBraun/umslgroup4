@@ -3,7 +3,7 @@ import {ValidateService} from '../../services/validate.service'
 import {AuthService} from '../../services/auth.service'
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
-import {Customer} from '../../../../Customer';
+import {User} from '../../../../User';
 import {AccordionModule} from '../primeng/primeng';     //accordion and accordion tab
 import {MenuItem} from '../primeng/primeng';            //api
 import {DataTableModule,SharedModule} from 'primeng/primeng';
@@ -18,9 +18,13 @@ export class UsersComponent implements OnInit {
     firstName: String;
     lastName: String;
     businessName: String;
-    passWord: String;
+    password: String;
     email: String;
-    customers: Customer[];
+    displayDialog: boolean;
+    user: User = new PrimeUser();
+    selectedUser: User;
+    plusUser: boolean;
+    users: User[];
 
   constructor(    
     private validateService: ValidateService,
@@ -29,48 +33,122 @@ export class UsersComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-        this.authService.getCustomer().subscribe(customers => {
-      this.customers = customers;
+        this.authService.getUser().subscribe(users => {
+      this.users = users;
     });
   }
 
-      addCustomer(){
-        var newCustomer = {
-          uname: this.username,
+      addUser(){
+        var newUser = {
+          username: this.username,
           fName: this.firstName,
           lName: this.lastName,
           bName: this.businessName,
-          pWord: this.passWord,
+          password: this.password,
           email: this.email
         }
         
-        this.authService.addCustomer(newCustomer)
-            .subscribe(customer => {
-                this.customers.push(customer);
+        this.authService.addUser(newUser)
+            .subscribe(user => {
+                this.users.push(user);
                 this.username = '';
                 this.firstName = '';
                 this.lastName = '';
                 this.businessName = '';
-                this.passWord = '';
+                this.password = '';
                 this.email = '';
             });
 
     }
 
-    deleteCustomer(id){
-      var customers = this.customers;
+    delete(id){
+      var users = this.users;
 
-      this.authService.deleteCustomer(id).subscribe(data => {
+      this.authService.deleteUser(id).subscribe(data => {
         if(data.n == 1){
-           for(var i = 0;i < customers.length;i++){
-            if(customers[i]._id == id){
-              customers.splice(i,1);
+           for(var i = 0;i < users.length;i++){
+            if(users[i]._id == id){
+              users.splice(i,1);
             }
           }
         }
       });
     }
 
+    showDialogToAdd(){
+      this.plusUser = true;
+      this.user = new PrimeUser();
+      this.displayDialog = true;
+    }
+
+    save(){
+
+
+      var users = users;
+      if(this.plusUser)
+        this.authService.addUser(this.user)
+            .subscribe(user => {
+                this.users.push(user);
+                this.username = '';
+                this.firstName = '';
+                this.lastName = '';
+                this.businessName = '';
+                this.password = '';
+                this.email = '';
+            });
+      else 
+        this.authService.save(this.user);
+        
+      this.user=null;
+      this.displayDialog=false;
+    }
+
+    deleteUser(id){
+      var users = this.users;
+
+      this.authService.deleteUser(id).subscribe(data => {
+        if(data.n == 1){
+           for(var i = 0;i < users.length;i++){
+            if(users[i]._id == id){
+              users.splice(i,1);
+            }
+          }
+        }
+      });
+      this.user=null;
+      this.displayDialog=false;
+    }
+
+    onRowSelect(event){
+      this.plusUser = false;
+      this.user = this.cloneUser(event.data);
+      this.displayDialog=true;
+    }
+
+    cloneUser(u: User): User{
+      let user = new PrimeUser();
+      for(let prop in u){
+        user[prop] = u[prop];
+      }
+      return user;
+    }
+
+    findSelectedUserIndex(): number{
+      return this.users.indexOf(this.selectedUser);
+    }
+
+
+
+}
+
+class PrimeUser implements User {
+  _id: string;
+  username: String;
+  firstName: String;
+  lastName: String;
+  businessName: String;
+  passWord: String;
+  email: String;
 
 
 }

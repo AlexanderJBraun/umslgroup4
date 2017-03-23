@@ -66,6 +66,10 @@ export class AuthService {
       return this.http.get('http://localhost:3000/customers/customers')
           .map(res => res.json());
   }
+ getUser(){
+      return this.http.get('http://localhost:3000/users/users')
+          .map(res => res.json());
+  }
 
 
   addProduct(product){
@@ -75,7 +79,17 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  addUser(user){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/users/newUser',  user,{headers: headers})
+      .map(res => res.json());
+  }
   
+   deleteUser(id){
+    return this.http.delete('http://localhost:3000/users/user/'+id)
+      .map(res => res.json());
+  }
 
  addCustomer(customer){
     let headers = new Headers();

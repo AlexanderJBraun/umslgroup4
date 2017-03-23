@@ -4,7 +4,13 @@ const config = require('../config/database');
 
 // User Schema
 const UserSchema = mongoose.Schema({
-  name: {
+  firstName: {
+    type: String
+  },
+  lastName: {
+    type: String
+  },
+  businessName: {
     type: String
   },
   email: {
@@ -20,6 +26,10 @@ const UserSchema = mongoose.Schema({
     required: true
   }
 });
+
+module.exports.getUserById = function(id, callback){
+  User.findById(id, callback);
+}
 
 const User = module.exports = mongoose.model('User', UserSchema);
 

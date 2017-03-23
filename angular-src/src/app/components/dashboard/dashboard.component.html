@@ -57,7 +57,7 @@
 </div>-->
 
 
-<p-dataTable [value]="products" selectionMode="single" [(selection)]="selectedcar" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true">
+<p-dataTable [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true">
     <p-header>Products List</p-header>
     <p-column field="name" header="Name" [sortable]="true"></p-column>
     <p-column field="description" header="Description" [sortable]="true"></p-column>
@@ -69,19 +69,19 @@
 <p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="product">
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="name">Name</label></div>
+            <div class="ui-grid-col-4"><label for="name">NAME</label></div>
             <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="product.name" /></div>
         </div>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="description">Description</label></div>
+            <div class="ui-grid-col-4"><label for="description">DESCRIPTION</label></div>
             <div class="ui-grid-col-8"><input pInputText id="description" [(ngModel)]="product.description" /></div>
         </div>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="price">Price</label></div>
+            <div class="ui-grid-col-4"><label for="price">PRICE</label></div>
             <div class="ui-grid-col-8"><input pInputText id="price" [(ngModel)]="product.price" /></div>
         </div>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="inStock">Quantity</label></div>
+            <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
             <div class="ui-grid-col-8"><input pInputText id="inStock" [(ngModel)]="product.inStock" /></div>
         </div>
     </div>
