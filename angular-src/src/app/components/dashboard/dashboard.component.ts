@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import {ValidateService} from '../../services/validate.service'
 import {AuthService} from '../../services/auth.service'
 import {FlashMessagesService} from 'angular2-flash-messages';
@@ -15,6 +15,10 @@ export class DashboardComponent implements OnInit {
     itemDescription: String;
     price: Number;
     inStock: Number;
+    displayDialog: boolean;
+    product: Product = new PrimeProduct();
+    selectedProduct: Product;
+    plusProduct: boolean;
     products: Product[];
 
   constructor(    
@@ -62,6 +66,75 @@ export class DashboardComponent implements OnInit {
       });
     }
 
+    showDialogToAdd(){
+      this.plusProduct = true;
+      this.product = new PrimeProduct();
+      this.displayDialog = true;
+    }
+
+    save(){
+      var products = products;
+      if(this.plusProduct)
+        this.authService.addProduct(this.product)
+            .subscribe(product => {
+                this.products.push(product);
+                this.name = '';
+                this.itemDescription = '';
+                this.price = null;
+                this.inStock = null;
+            });
+      else 
+        this.authService.save(this.product);
+        
+      this.product=null;
+      this.displayDialog=false;
+    }
+
+    delete(id){
+      var products = this.products;
+
+      this.authService.deleteProduct(id).subscribe(data => {
+        if(data.n == 1){
+           for(var i = 0;i < products.length;i++){
+            if(products[i]._id == id){
+              products.splice(i,1);
+            }
+          }
+        }
+      });
+      this.product=null;
+      this.displayDialog=false;
+    }
+
+    onRowSelect(event){
+      this.plusProduct = false;
+      this.product = this.cloneProduct(event.data);
+      this.displayDialog=true;
+    }
+
+    cloneProduct(p: Product): Product{
+      let product = new PrimeProduct();
+      for(let prop in p){
+        product[prop] = p[prop];
+      }
+      return product;
+    }
+
+    findSelectedProductIndex(): number{
+      return this.products.indexOf(this.selectedProduct);
+    }
+    
+
+
+
+}
+
+class PrimeProduct implements Product {
+  _id: string;
+  name: string;
+  itemDescription: String;
+  price: Number;
+  inStock: Number;
 
 
 }

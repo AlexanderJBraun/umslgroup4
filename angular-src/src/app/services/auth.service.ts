@@ -75,6 +75,8 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  
+
  addCustomer(customer){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
@@ -84,6 +86,15 @@ export class AuthService {
 
   deleteProduct(id){
     return this.http.delete('http://localhost:3000/products/product/'+id)
+      .map(res => res.json());
+  }
+    delete(id){
+    return this.http.delete('http://localhost:3000/products/product'+id)
+      .map(res => res.json());
+  }
+
+    save(product){
+      return this.http.put('http://localhost:3000/products/products', product)
       .map(res => res.json());
   }
 

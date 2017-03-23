@@ -15,7 +15,7 @@ import { CartComponent } from "./components/cart/cart.component";
 import { OrdersComponent } from "./components/orders/orders.component";
 import { InvoicesComponent } from "./components/invoices/invoices.component";
 import { UsersComponent } from "./components/users/users.component";
-import {DataTableModule,SharedModule} from "../../../angular-src/node_modules/primeng/primeng";
+import {DataTableModule,SharedModule, DialogModule, ButtonModule} from "../../../angular-src/node_modules/primeng/primeng";
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
@@ -55,6 +55,8 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule,
     DataTableModule,
+    ButtonModule,
+    DialogModule,
     SharedModule
   ],
   providers: [ValidateService, AuthService, AuthGuard],
